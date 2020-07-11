@@ -1,0 +1,32 @@
+---
+name: simject
+pack: no
+
+simject:
+  type: tweak
+  dir: simject
+  for: sim
+  macros:
+    - 'DYLIB_DIR=@\"$$DRAGONBUILD/simulator/load\"'
+  frameworks:
+    - Foundation
+  files:
+    - simject.m
+  stage:
+    - cp $build_target_file $dragondir/simulator/load/simject.dylib
+    - cp simject.plist $dragondir/simulator/load/simject.plist
+
+resim:
+  type: cli
+  dir: resim
+  for: host
+  modulesinternal: ''
+  macros:
+    - 'DYLIB_DIR=@\"$$DRAGONBUILD/simulator/load\"'
+  frameworks:
+    - Foundation
+  files:
+    - resim.mm
+  stage:
+    - cp $build_target_file $dragondir/simulator/resim
+    - cp $build_target_file /usr/local/bin/resim
